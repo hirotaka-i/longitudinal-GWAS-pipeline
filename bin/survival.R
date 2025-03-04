@@ -94,23 +94,23 @@ test_data <- matrix('', n_snps, 10)
 
 for (i in 1:n_snps) {
   tmp.values <- unlist(tmp.split[[i]])
-  alt <- strsplit(tmp.split[[1]][4], '_')[[1]][1]
-  ref <- strsplit(tmp.split[[1]][4], '_')[[1]][2]
+  alt <- strsplit(tmp.values[4], '_')[[1]][1]
+  a1  <- strsplit(tmp.values[4], '_')[[1]][2]
   marker.id <- paste(tmp.values[1],
         tmp.values[2],
         tmp.values[3],
         alt,
         sep=":")
   
-  allele_freq <- sum(snp_data[,i], na.rm=TRUE) / (sum(!is.na(snp_data[,i])) * 2)
+  a1_freq <- sum(snp_data[,i], na.rm=TRUE) / (sum(!is.na(snp_data[,i])) * 2)
   miss_freq <- sum(is.na(snp_data[,i])) / length(snp_data[,i])
   obs_ct <- sum(!is.na(snp_data[,i]))
 
-  test_data[i,] <- c(tmp.split[[i]][1:2], 
+  test_data[i,] <- c(tmp.values[1:2], 
                      marker.id, 
-                     tmp.split[[i]][3], 
-                     alt, alt, 
-                     allele_freq, 
+                     tmp.values[3], 
+                     alt, a1, 
+                     a1_freq, 
                      miss_freq, 
                      obs_ct, 
                      'CoxPH')
